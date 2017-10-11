@@ -37,9 +37,7 @@ class Profile extends Component {
       this.setState({
 				info: response[0]
 			})
-			console.log('new STATE', this.state.info)
-    })
-  }
+    }
 
    componentDidMount(){
      this.pullAboutMeData();
