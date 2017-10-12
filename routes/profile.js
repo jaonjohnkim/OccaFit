@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
 router.get('/about', (req, res) => {
   console.log('in the PROFILE ROUTER')
   // get user id from the req
-  var id = req.user.id;
+  var id = req.headers.user;
   db.getAboutMe(id, (result) => {
     console.log('about to send response')
     res.send(result)
@@ -27,9 +27,10 @@ router.get('/activities', (req, res) => {
   // Get all of this user's data
   // Get all of the upcoming events for this user also
   // Display them in chronological order
-  // console.log('ACTIVITIES GET REQUEST', req.user);
-  db.getUserPostings(req.user.id, userPosts => {
-    db.getUserAcceptPostings(req.user.id, acceptedPosts => {
+  console.log('ACTIVITIES GET REQUEST', req.headers.user);
+  var id = req.headers.user;
+  db.getUserPostings(id, userPosts => {
+    db.getUserAcceptPostings(id, acceptedPosts => {
       console.log('UserPosts:', userPosts.sort(function(o){ return new Date( o.date ) }));
       console.log('AcceptedPosts:', acceptedPosts.sort(function(o){ return new Date( o.date ) }));
       var activities = {

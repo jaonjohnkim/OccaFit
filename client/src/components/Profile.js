@@ -15,6 +15,7 @@ class Profile extends Component {
 			details: 'Contact Details',
 			activities: null,
 			showModal: false
+			user: null
 		}
 	}
 
@@ -25,9 +26,26 @@ class Profile extends Component {
 		console.log('new state', this.state.showModal)
 	}
 
+	checkAuth = () => {
+    fetch('/profile', {
+      credentials: 'include'
+    }).then(response => {
+      return response.ok ? response.json() : {};
+    }).then(user => {
+      if (user && user.name) {
+        this.setState({
+          user: user,
+          authenticated: true
+        });
+      }
+			this.pullAboutMeData();
+			this.getActivities();
+    });
+  }
+
 	pullAboutMeData() {
     console.log('in pullAboutMeData')
-    fetch('/profile/about', {credentials: 'include'})
+    fetch('/profile/about', {credentials: 'include', headers: {user: this.state.user.id}})
 		.then(response => {
 			console.log('response', response);
 			return response.json();
@@ -41,9 +59,8 @@ class Profile extends Component {
     })
   }
 
-   componentDidMount(){
-     this.pullAboutMeData();
-		 this.getActivities();
+  componentWillMount(){
+  	this.checkAuth();
   }
 
   images = ['daniel.jpg', 'elliot.jpg', 'matthew.png', 'rachel.png'];
@@ -51,7 +68,8 @@ class Profile extends Component {
   user = '/' + this.images[Math.floor(Math.random() * this.images.length)];
 
 	getActivities() {
-		fetch('/profile/activities', { credentials: "include" })
+		console.log('THIS.STATE.USER:', this.state.user);
+		fetch('/profile/activities', { credentials: "include", headers: {user: this.state.user.id}})
 		.then(resp => resp.json())
 		.then(resp => {
 			this.setState({ activities: resp });

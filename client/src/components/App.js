@@ -92,7 +92,7 @@ class App extends Component {
             )} />
 
             <Route exact path='/profile' render={props => (
-              <Profile user={this.state.user} {...props}/>
+              <Profile {...props}/>
             )} />
 
             <Route exact path='/create' render={props => (

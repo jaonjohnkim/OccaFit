@@ -199,7 +199,7 @@ var createPair = function(requestObj, callback) {
 var getUserAcceptPostings = function(userId, callback) {
 	var query = `SELECT result.*, users.name FROM
               (select r.userId as hostId, r.id as postingId, p.title, p.location, p.date, p.duration, p.details, p.meetup_spot, p.buddies, p.userId from requests r left join postings p
-              on r.postingId = p.id where r.UserId = 2 and r.status = 'accept')result
+              on r.postingId = p.id where r.UserId = ? and r.status = ?)result
               INNER JOIN users ON result.userId = users.id`;
 	connection.query(query, [userId, 'accept'], (err, result) => {
 		if (err) {
