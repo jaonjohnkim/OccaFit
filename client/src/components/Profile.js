@@ -14,7 +14,7 @@ class Profile extends Component {
 			info: null,
 			details: 'Contact Details',
 			activities: null,
-			showModal: false
+			showModal: false,
 			user: null
 		}
 	}
