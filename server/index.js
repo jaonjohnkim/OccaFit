@@ -18,7 +18,7 @@ var options = {
   host: process.env.DBSERVER || 'localhost',
   port: 3306,
   user: process.env.DBUSER || 'root',
-  password: process.env.DBPASSWORD || 'plantlife',
+  password: process.env.DBPASSWORD || '',
   database: 'fitbud',
   checkExpirationInterval: 60000,
   expiration: 3600000,
