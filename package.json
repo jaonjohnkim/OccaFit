@@ -26,7 +26,10 @@
     "passport-local": "*",
     "passport.socketio": "^3.7.0",
     "socket.io": "^2.0.3",
-    "xtend": "^4.0.1"
+    "xtend": "^4.0.1",
+    "react-dropzone": "^4.2.0",
+    "sha1": "^1.1.1",
+    "superagent": "^3.6.3"
   },
   "engines": {
     "node": "6.11.2",

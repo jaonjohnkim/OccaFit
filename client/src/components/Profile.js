@@ -31,23 +31,32 @@ class Profile extends Component {
 		this.props.getAboutMe(id);
   }
 
-  componentWillMount() {
-		var id = this.props.match.params.id;
-			this.props.getUser(id);
-			this.pullAboutMeData();
-			this.getActivities();
-			this.getFriends();
-	}
+  componentWillMount () {
+  	var id = this.props.match.params.id;
+  		this.props.getUser(id);
+  		this.pullAboutMeData();
+  		this.getActivities();
+  		this.getFriends();
+  }
+
+
 
 	getActivities() {
 		var id = this.props.match.params.id;
 		this.props.getUserActivities(id);
 	}
 
+
 	getFriends() {
 		var id = this.props.match.params.id;
 		this.props.getUserFriends(id);
 	}
+
+
+  images = ['daniel.jpg', 'elliot.jpg', 'matthew.png', 'rachel.png'];
+
+  user = '/' + this.images[Math.floor(Math.random() * this.images.length)];
+
 
 	render() {
 		return (

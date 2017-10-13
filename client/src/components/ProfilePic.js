@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import { Container, Image, List, Button } from 'semantic-ui-react';
+import UpdateImage from './UpdateProfileImage.js'
 
 class ProfilePic extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       message: 'Add Friend',
       requested: false,
-      status: null
+      status: null,
+      picture: this.props.user
     }
   }
 
@@ -37,14 +40,30 @@ class ProfilePic extends Component {
       message: 'Request Pending',
       requested: true
     });
+
+  }
+
+  changePicture (url){
+  	console.log('urrrrrllllll', url)
+  	this.setState({
+  		picture: url,
+  		showModel: false
+  	})
+
   }
 
   render() {
     return (
       <Container style={{margin: '30px'}}>
 
-        <Image src={this.pic} size='small' shape='circular' centered style={{margin: 'auto'}} />
-      
+
+        <Image 
+        id="profileImage"
+        src={this.state.picture} 
+        size='small' shape='circular' 
+        centered style={{margin: 'auto'}} 
+        onClick={()=> {console.log('got it')}}/>
+        <UpdateImage changePicture={this.changePicture.bind(this)}/>
         <Container style={{"textAlign": "center"}}>
           <List style={{margin: '10px'}}>
             <List.Item>
@@ -63,3 +82,7 @@ class ProfilePic extends Component {
 }
 
 export default ProfilePic;
+
+
+
+
