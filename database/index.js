@@ -345,7 +345,9 @@ var getUsers = function(callback) {
       console.error('error getting all users', err);
       callback(err, null);
     } else {
+
       callback(null, results);
+
     };
   });
 };
@@ -363,6 +365,30 @@ var getPendingFriendRequests = function(id, callback) {
     };
   });
 };
+
+
+var addImage = function(url, id, callback) {
+  var query = "UPDATE users SET imageUrl=? WHERE id=?";
+  connection.query(query, [url, id], (err, result) => {
+    if(err) {
+      console.log('err posting imageurl to users table')
+    } else{
+      callback(err,'successfully stored imageURL to users database')
+    }
+  })
+}
+
+var getImage = function(id, callback) {
+  var query = "Select imageUrl from users WHERE id=?";
+  connection.query(query, [id], (err, result) => {
+    if(err) {
+      console.log('err getting imageurl from users table', err)
+    } else{
+      callback(err, result)
+    }
+  })
+}
+
 //insert into postings (title, location, date, duration, details, meetup_spot, buddies, userId) values ('hike', 'sf', '2017-01-01 00:00:00', 1, 'hike in muir woods', 'parking', 2, 1);
 
 module.exports = {
@@ -390,5 +416,8 @@ module.exports = {
   checkFriendStatus,
   getPendingFriendRequests,
   acceptFriendRequest,
-  declineFriendRequest
+  declineFriendRequest,
+  addImage,
+  getImage
+
 };

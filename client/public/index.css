@@ -35,7 +35,6 @@ body {
 #profileImage:hover {
 	border: 3px solid slategray;
 	border-radius: 50%;
-	background-image: url("https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-camera-outline-128.png")
 }
 
 #friendName {
@@ -43,6 +42,10 @@ body {
 }
 #modalDescription {
 	margin-left: 20px;
+}
+
+.editbuttion {
+	float: center;
 }
 
 

@@ -53,18 +53,23 @@ class UpdateImage extends React.Component {
   }
 
   changeImage (url) {
-  	console.log("propppp", this.props)
+  	
   	this.props.changePicture(url)
+
+  	var id = this.props.current
+  	this.props.sendImage(url)
+
 
   }
   
 
   render() {
      return (
-       <Modal trigger={<Button>Edit Poto</Button>}>
+       <Modal trigger={<Button>Edit Photo</Button>}>
 			    <Modal.Header>Select a Photo</Modal.Header>
 			    <Modal.Content image>
 			      <div>
+			      {console.log("propppp", this.props)}
 			      <Dropzone onDrop={this.uploadImage.bind(this)}/>
 			      </div>
 			      <Modal.Description id='modalDescription'>

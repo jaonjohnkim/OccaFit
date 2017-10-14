@@ -31,15 +31,15 @@ class Profile extends Component {
 		this.props.getAboutMe(id);
   }
 
+
   componentWillMount () {
   	var id = this.props.match.params.id;
   		this.props.getUser(id);
   		this.pullAboutMeData();
   		this.getActivities();
   		this.getFriends();
+
   }
-
-
 
 	getActivities() {
 		var id = this.props.match.params.id;
@@ -61,8 +61,10 @@ class Profile extends Component {
 	render() {
 		return (
 			[<Container style={{marginTop: '20px'}} id="profile">
-				{this.props.user && this.props.currentProfile
-					? <ProfilePic user={this.props.currentProfile} currentUser={this.props.user} name={this.props.currentProfile && this.props.currentProfile.name} checkFriendStatus={this.props.checkFriendStatus} friendStatus={this.props.friendStatus} requested={this.props.requested} accepted={this.props.accepted}/>
+
+				{this.props.user && this.props.currentProfile 
+					? <ProfilePic image= {'/daniel.jpg'} user={this.props.currentProfile} currentUser={this.props.user} name={this.props.currentProfile && this.props.currentProfile.name} checkFriendStatus={this.props.checkFriendStatus} friendStatus={this.props.friendStatus} requested={this.props.requested}/>
+
 					: null
 				}
 				<Card.Group itemsPerRow={3}>
