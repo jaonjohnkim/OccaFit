@@ -15,6 +15,7 @@ class ProfilePic extends Component {
     // currentUser: this.props.currentUser.id, 
     // otherUser: this.props.user.id
     this.props.checkFriendStatus(this.props.currentUser.id, this.props.user.id);
+    console.log('PROF PIC:', this);
   }
 
   images = ['daniel.jpg', 'elliot.jpg', 'matthew.png', 'rachel.png'];
@@ -39,7 +40,6 @@ class ProfilePic extends Component {
   }
 
   render() {
-    console.log('PROF PIC:', this);
     return (
       <Container style={{margin: '30px'}}>
 
