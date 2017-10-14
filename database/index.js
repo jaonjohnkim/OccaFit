@@ -254,6 +254,7 @@ var friendList = function (userId, callback) {
     if(err) {
       console.error('error on query 1 of friendlist');
       callback(err, null);
+
     } else {
       callback(null, result);
     }
