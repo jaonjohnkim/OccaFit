@@ -123,13 +123,12 @@ io.use(passportSocketIo.authorize({
   secret: 'secret',
   store: sessionStore,
   success: onAuthorizeSuccess,
-  fail: onAuthorizeFail,
-  query: 0,
-  _query: 0 // These are useless, delete later
+  fail: onAuthorizeFail
 }))
 
 function onAuthorizeSuccess(data, accept) {
-  console.log('successful connection to socket.io');
+  // console.log(accept);
+  console.log('successful connection to socket.io', data);
   accept();
 }
 
@@ -148,22 +147,44 @@ function onAuthorizeFail(data, message, error, accept) {
 const clients = [];
 io.on('connection', socket => {
   //Events to listen for, Change in Event, Change in
-  socket.emit('hello', 'SUP CLIENT');
+  // console.log(arguments);
+  // console.log(socket);
+  // console.log(socket.request.session.passport.user);
+  socket.emit('hello', 'successfully connected, your properties are:', socket.request.session.passport);
   clients.push(socket);
   socket.on('connect', data => {
     socket.emit('hello', 'HI CLIENT~!')
   })
-  socket.on('hello', data => {
+  // socket.on('hello', data => {
+  //   clients.forEach(client => {
+  //     if (client.id !== socket.id) {
+  //       client.emit('hello', 'Hello user:' + client.id + ' from ' + socket.id);
+  //     }
+  //   })
+  //   // socket.emit('hello', 'Hi Client!');
+  // })
+  socket.on('friendRequestTo', data => {
+    console.log('RECEIVED NEW FRIEND REQUEST FROM CLIENT', data);
+    console.log('Friend request is from user Id: ' + socket.request.session.passport.user + ' to ' + data);
     clients.forEach(client => {
-      if (client.id !== socket.id) {
-        client.emit('hello', 'Hello user:' + client.id + ' from ' + socket.id);
+      if (client.request.session.passport.user === data) {
+        console.log('User is online, sending alert')
+        client.emit('friendRequestFrom', socket.request.session.passport.user);
+      }
+    });
+  });
+
+  socket.on('friendRequestAccept', data => {
+    console.log('RECEIVED ACCEPTED REQUEST FROM CLIENT', data);
+    console.log(socket.request.session.passport);
+    var userId = data.userOneId || data.userTwoId;
+    clients.forEach(client => {
+      if (client.request.session.passport.user === userId) {
+        console.log('User is online, sending alert')
+        client.emit('friendRequestAccept', data.name);
       }
     })
-    // socket.emit('hello', 'Hi Client!');
   })
-  socket.on('friendRequest', () => {
-
-  });
   socket.on('disconnect', () => console.log('Client Disconnected'));
 });
 

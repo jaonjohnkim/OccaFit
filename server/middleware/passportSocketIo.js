@@ -40,7 +40,7 @@ function authorize(options) {
   // console.log('WHAT ARE MY OPTIONS:', options)
 
   var auth = xtend(defaults, options);
-  // console.log('WHAT IS AUTH?:', auth);
+  console.log('WHAT IS AUTH?:', auth);
 
   if(!auth.passport) {
     try {
