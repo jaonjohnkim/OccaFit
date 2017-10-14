@@ -62,9 +62,13 @@ class Profile extends Component {
 		return (
 			[<Container style={{marginTop: '20px'}} id="profile">
 
-				{this.props.user && this.props.currentProfile 
-					? <ProfilePic defaultImage={this.images[0]} image= {this.props.currentProfile.imageUrl} user={this.props.currentProfile} currentUser={this.props.user} name={this.props.currentProfile && this.props.currentProfile.name} checkFriendStatus={this.props.checkFriendStatus} friendStatus={this.props.friendStatus} requested={this.props.requested}/>
-
+				{this.props.user && this.props.currentProfile
+					? <ProfilePic defaultImage={this.images[0]} image= {this.props.currentProfile.imageUrl}
+						user={this.props.currentProfile} currentUser={this.props.user}
+						name={this.props.currentProfile && this.props.currentProfile.name}
+						socket={this.props.socket} checkFriendStatus={this.props.checkFriendStatus}
+						friendStatus={this.props.friendStatus} requested={this.props.requested}
+						accepted={this.props.accepted}/>
 					: null
 				}
 				<Card.Group itemsPerRow={3}>

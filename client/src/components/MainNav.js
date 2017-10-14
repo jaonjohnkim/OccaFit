@@ -38,7 +38,7 @@ class MainNav extends Component {
     var userId = data.value;
     var newPath = '/profile/' + userId;
     this.setState({path: newPath});
-    this.setState({search: true}); 
+    this.setState({search: true});
     setTimeout(() => {
       this.props.getUser(userId);
       this.props.getUserActivities(userId);
@@ -57,7 +57,7 @@ class MainNav extends Component {
       this.props.getAboutMe(id);
       this.props.getUserFriends(id);
       this.props.checkFriendStatus(id, this.props.currentProfile.id);
-    }, 500); 
+    }, 500);
     window.location.reload();
   }
 
@@ -78,6 +78,7 @@ class MainNav extends Component {
       body: JSON.stringify({user1: otherUser, user2: currentUser})
     };
     fetch('/profile/accept', options);
+    this.props.socket.emit('friendRequestAccept', otherUser);
     this.setState({
       accepted: true
     })
@@ -136,7 +137,9 @@ class MainNav extends Component {
             <Dropdown text="Notifications" className='link item' multiple selection search>
               <Dropdown.Menu>
                 <Dropdown.Item>
-                  <NotificationList user={this.props.user} acceptFriendRequest={this.acceptFriendRequest} handleDeclineClick={this.handleDeclineClick} accepted={this.state.accepted} declined={this.state.declined}/>
+                  <NotificationList user={this.props.user} acceptFriendRequest={this.acceptFriendRequest} handleDeclineClick={this.handleDeclineClick}
+                    accepted={this.state.accepted} declined={this.state.declined} friendRequest={this.props.friendRequest}
+                    getPendingNotifications={this.props.getPendingNotifications} notifications={this.props.notifications}/>
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>

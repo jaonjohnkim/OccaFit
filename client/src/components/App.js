@@ -29,7 +29,11 @@ class App extends Component {
       friends: [],
       friendStatus: null,
       requested: null,
-      accepted: null
+      accepted: null,
+      socket: null,
+      friendRequest: false,
+      open: false,
+      notifications: null
     }
 
     this.cookies = new Cookies();
@@ -41,20 +45,34 @@ class App extends Component {
     var socket = socketIOClient('http://127.0.0.1:3001', {
       credentials: 'include',
       query: 'session_id=' + this.state.sid,
-      // cookie: {text: 'WOW IM A COOKIE'}
     });
-    // var socket = socketIOClient('http://127.0.0.1:3001');
     socket.on('connect', data => {
-      // console.log('Connection event', data)
       socket.emit('hello', 'Hello Server', resp => console.log('Server response', resp));
     });
-    // setInterval(() => {
-    //   console.log('Emitting Event every second to server');
-    //   socket.emit('wave', 'Client waved at server')
-    // }, 1000);
     socket.on('hello', data => console.log('RESPONSE FROM SOCKET:', data));
-    socket.on('wave', data => console.log('Server Response:', data));
+    socket.on('friendRequestFrom', data => {
+      setTimeout(this.alertFriendRequest.bind(this));
+      // this.alertFriendRequest(data);
+    });
+
+    socket.on('friendRequestAccept', data => {
+      alert('Your new friend accepted!');
+    })
+
+    this.setState({socket: socket});
   }
+
+  alertFriendRequest = (data) => {
+    this.getPendingNotifications();
+    console.log('New Friend Request:', data);
+    alert('You Have a New Friend Request!');
+    this.setState({friendRequest: true})
+  }
+
+  readFriendRequest = () => {
+    this.setState({friendRequest: false});
+  }
+
 
   checkAuth = () => {
     fetch('/profile', {
@@ -92,6 +110,20 @@ class App extends Component {
 
   changeProfile = () => {
   }
+
+  getPendingNotifications() {
+    console.log(this.state.user);
+    fetch('/notification', { credentials: "include", headers: {user: this.state.user.id} })
+      .then(response => {
+        return response.json();
+      })
+      .then(response => {
+        this.setState({
+          notifications: response
+        })
+      })
+  }
+
 
   getAboutMe = (id) => {
     fetch('/profile/about', {credentials: 'include', headers: {user: id}})
@@ -182,7 +214,9 @@ class App extends Component {
                    signoff={this.handleSignOff} user={this.state.user} currentProfile={this.state.currentProfile}
                    getUser={this.getUser.bind(this)} getAboutMe={this.getAboutMe.bind(this)}
                    getUserActivities={this.getUserActivities.bind(this)} getUserFriends={this.getUserFriends.bind(this)}
-                   changeProfile={this.changeProfile.bind(this)} checkFriendStatus={this.checkFriendStatus.bind(this)} />
+                   changeProfile={this.changeProfile.bind(this)} checkFriendStatus={this.checkFriendStatus.bind(this)}
+                   friendRequest={this.state.friendRequest} readFriendRequest={this.readFriendRequest.bind(this)} socket={this.state.socket}
+                  getPendingNotifications={this.getPendingNotifications.bind(this)} notifications={this.state.notifications}/>
           <Switch>
             <Route exact path='/' render={props => (
               <Home user={this.state.user} visible={this.state.visible} {...props} />
@@ -215,7 +249,8 @@ class App extends Component {
                 friends={this.state.friends} router={Router} getAboutMe={this.getAboutMe.bind(this)}
                 getUserActivities={this.getUserActivities.bind(this)} activities={this.state.activities}
                 info={this.state.info} route={Route} {...props} checkFriendStatus={this.checkFriendStatus.bind(this)}
-                friendStatus={this.state.friendStatus} requested={this.state.requested} accepted={this.state.accepted}/>
+                friendStatus={this.state.friendStatus} requested={this.state.requested} accepted={this.state.accepted}
+                socket={this.state.socket}/>
             )} />
 
             <Route exact path='/create' render={props => (

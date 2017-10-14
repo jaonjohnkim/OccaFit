@@ -11,15 +11,16 @@ class NotificationList extends Component {
   }
 
   getPendingRequests() {
-    fetch('/notification', { credentials: "include", headers: {user: this.props.user.id} })
-      .then(response => {
-        return response.json();
-      })
-      .then(response => {
-        this.setState({
-          notifications: response
-        })
-      })
+    // fetch('/notification', { credentials: "include", headers: {user: this.props.user.id} })
+    //   .then(response => {
+    //     return response.json();
+    //   })
+    //   .then(response => {
+    //     this.setState({
+    //       notifications: response
+    //     })
+    //   })
+    this.props.getPendingNotifications();
   }
 
   componentWillMount() {
@@ -29,7 +30,7 @@ class NotificationList extends Component {
   render() {
     return (
       <Card.Group>
-        {this.state.notifications.length > 0 ? this.state.notifications.map(notification => {
+        {this.props.notifications && this.props.notifications.length > 0 ? this.props.notifications.map(notification => {
           return <NotificationListEntry user={this.props.user} notification={notification} acceptFriendRequest={this.props.acceptFriendRequest} handleDeclineClick={this.props.handleDeclineClick} accepted={this.props.accepted} declined={this.props.declined}/>
         }) : <Card.Content>No Notifications</Card.Content>}
       </Card.Group>

@@ -21,6 +21,8 @@ class ProfilePic extends Component {
   }
 
   componentDidMount() {
+    // currentUser: this.props.currentUser.id,
+    // otherUser: this.props.user.id
     this.props.checkFriendStatus(this.props.currentUser.id, this.props.user.id);
 
     console.log('PROF PIC:', this);
@@ -40,7 +42,7 @@ class ProfilePic extends Component {
               picture: response.length && response[0].imageUrl ? response[0].imageUrl : this.state.picture
             })
 
-      })	
+      })
   }
 
   sendImage(url) {
@@ -53,7 +55,7 @@ class ProfilePic extends Component {
       body: JSON.stringify(info),
       headers: {
           'Content-Type': 'application/json'
-        } 
+        }
     }).then("response from upload image",response => {
       if (response.ok) console.log('request made!');
     })
@@ -71,11 +73,12 @@ class ProfilePic extends Component {
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json'
-        }, 
+        },
         method: 'POST',
         body: JSON.stringify({currentUser: this.props.currentUser.id, otherUser: this.props.user.id})
       }
       fetch('/profile/friends', options);
+      this.props.socket.emit('friendRequestTo', this.props.user.id, resp => console.log('Friend Request Received By Server:', resp));
     }
     this.setState({
       message: 'Request Pending',
@@ -95,19 +98,19 @@ class ProfilePic extends Component {
   render() {
     return (
       <Container style={{margin: '30px'}}>
-
-        <Image 
+        <Image
         id="profileImage"
-        src={this.props.user.imageUrl ? this.props.user.imageUrl : '/daniel.jpg'} 
-        size='small' shape='circular' 
-        centered style={{margin: 'auto'}} 
+        src={this.props.user.imageUrl ? this.props.user.imageUrl : '/daniel.jpg'}
+        size='small' shape='circular'
+        centered style={{margin: 'auto'}}
         onClick={()=> {console.log('got it')}}/>
-        <UpdateImage 
+        <UpdateImage
         	currentUser={this.props.currentUser}
         	user={this.props.user}
         	id='editbutton'
         	changePicture={this.changePicture.bind(this)}
         		sendImage={this.sendImage.bind(this)}/>
+
         <Container style={{"textAlign": "center"}}>
           <List style={{margin: '10px'}}>
             <List.Item>
@@ -126,7 +129,3 @@ class ProfilePic extends Component {
 }
 
 export default ProfilePic;
-
-
-
-
