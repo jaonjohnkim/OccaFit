@@ -21,7 +21,7 @@ class Friends extends Component {
   		this.setState({
 				friends: response
 			})
-    })
+    	})
 	}
 
 	handleUserClick (userinfo) {

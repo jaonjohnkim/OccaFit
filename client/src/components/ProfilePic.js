@@ -14,6 +14,10 @@ class ProfilePic extends Component {
       status: null,
       picture: this.props.image
     }
+
+    console.log('PROF PIC:', this);
+    this.getImage = this.getImage.bind(this);
+
   }
 
   componentDidMount() {
@@ -32,8 +36,9 @@ class ProfilePic extends Component {
             return response.json();
           })
           .then(response => {
+          	console.log(">>>>>>>>",this);
             this.setState({
-              picture: response.length ? response[0].imageUrl : this.state.picture
+              picture: response.length && response[0].imageUrl ? response[0].imageUrl : this.state.picture
             })
 
       })	
@@ -89,7 +94,6 @@ class ProfilePic extends Component {
   render() {
     return (
       <Container style={{margin: '30px'}}>
-
 
         <Image 
         id="profileImage"

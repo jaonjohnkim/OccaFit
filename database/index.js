@@ -249,6 +249,7 @@ var insertAboutMe = function(options, callback) {
 
 var friendList = function (userId, callback) {
   var query1 = `(SELECT userOneId from relationship WHERE userTwoId = ${userId} AND statusId = 1) Union (SELECT userTwoId from relationship WHERE userOneId = ${userId} AND statusId = 1)`;
+
   connection.query(query1, [userId, userId], function(err, result) {
     if(err) {
       console.error('error on query 1 of friendlist');
@@ -345,9 +346,7 @@ var getUsers = function(callback) {
       console.error('error getting all users', err);
       callback(err, null);
     } else {
-
       callback(null, results);
-
     };
   });
 };
