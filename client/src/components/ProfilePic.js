@@ -98,8 +98,6 @@ class ProfilePic extends Component {
   render() {
     return (
       <Container style={{margin: '30px'}}>
-
-<<<<<<< 4cdfdc9d38aae85490a8177286965f77874a28c7
         <Image
         id="profileImage"
         src={this.props.user.imageUrl ? this.props.user.imageUrl : '/daniel.jpg'}
@@ -112,10 +110,7 @@ class ProfilePic extends Component {
         	id='editbutton'
         	changePicture={this.changePicture.bind(this)}
         		sendImage={this.sendImage.bind(this)}/>
-=======
-        <Image src={this.pic} size='small' shape='circular' centered style={{margin: 'auto'}} />
 
->>>>>>> Live Notification
         <Container style={{"textAlign": "center"}}>
           <List style={{margin: '10px'}}>
             <List.Item>

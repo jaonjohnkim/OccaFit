@@ -7,7 +7,7 @@ import superagent from 'superagent'
 class UpdateImage extends React.Component {
   constructor(props) {
     super(props);
-  
+
     }
 
   uploadImage (files) {
@@ -53,7 +53,7 @@ class UpdateImage extends React.Component {
   }
 
   changeImage (url) {
-  	
+
   	this.props.changePicture(url)
 
   	var id = this.props.current
@@ -61,7 +61,7 @@ class UpdateImage extends React.Component {
 
 
   }
-  
+
 
   render() {
      return (
@@ -83,4 +83,3 @@ class UpdateImage extends React.Component {
 }
 
 export default UpdateImage
-
