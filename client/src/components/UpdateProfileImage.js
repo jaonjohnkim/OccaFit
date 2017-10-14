@@ -15,7 +15,7 @@ class UpdateImage extends React.Component {
   	const image = files[0];
 
   	const cloudName = 'hr-82';
-  	const url = 'https://api.cloudinary.com/v1_1/'+ cloudName+'/image/upload'
+  	const url = 'https://api.cloudinary.com/v1_1/'+ cloudName +'/image/upload'
 
   	const timestamp = Date.now()/1000
   	const uploadPreset = 'rggovxew'
@@ -65,11 +65,10 @@ class UpdateImage extends React.Component {
 
   render() {
      return (
-       <Modal trigger={<Button>Edit Photo</Button>}>
+       <Modal trigger={ this.props.currentUser.id === this.props.user.id ? <Button>Edit Photo</Button> : null}>
 			    <Modal.Header>Select a Photo</Modal.Header>
 			    <Modal.Content image>
 			      <div>
-			      {console.log("propppp", this.props)}
 			      <Dropzone onDrop={this.uploadImage.bind(this)}/>
 			      </div>
 			      <Modal.Description id='modalDescription'>

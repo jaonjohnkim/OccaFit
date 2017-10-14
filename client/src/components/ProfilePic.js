@@ -12,7 +12,7 @@ class ProfilePic extends Component {
       message: 'Add Friend',
       requested: false,
       status: null,
-      picture: this.props.image
+      picture: this.props.user.imageUrl
     }
 
     console.log('PROF PIC:', this);
@@ -36,7 +36,6 @@ class ProfilePic extends Component {
             return response.json();
           })
           .then(response => {
-          	console.log(">>>>>>>>",this);
             this.setState({
               picture: response.length && response[0].imageUrl ? response[0].imageUrl : this.state.picture
             })
@@ -58,6 +57,8 @@ class ProfilePic extends Component {
     }).then("response from upload image",response => {
       if (response.ok) console.log('request made!');
     })
+
+    window.location.reload();
 
   }
 
@@ -97,11 +98,13 @@ class ProfilePic extends Component {
 
         <Image 
         id="profileImage"
-        src={this.state.picture} 
+        src={this.props.user.imageUrl ? this.props.user.imageUrl : '/daniel.jpg'} 
         size='small' shape='circular' 
         centered style={{margin: 'auto'}} 
         onClick={()=> {console.log('got it')}}/>
         <UpdateImage 
+        	currentUser={this.props.currentUser}
+        	user={this.props.user}
         	id='editbutton'
         	changePicture={this.changePicture.bind(this)}
         		sendImage={this.sendImage.bind(this)}/>

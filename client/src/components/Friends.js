@@ -18,6 +18,7 @@ class Friends extends Component {
 			return response.json()
 		})
 		.then(response => {
+
   		this.setState({
 				friends: response
 			})
@@ -25,7 +26,7 @@ class Friends extends Component {
 	}
 
 	handleUserClick (userinfo) {
-		console.log("friend was clicked", userinfo)
+		//console.log("friend was clicked", userinfo)
 	}
 
 	render() {
