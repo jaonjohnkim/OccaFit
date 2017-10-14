@@ -31,35 +31,46 @@ class Profile extends Component {
 		this.props.getAboutMe(id);
   }
 
-  componentWillMount() {
-		var id = this.props.match.params.id;
-			this.props.getUser(id);
-			this.pullAboutMeData();
-			this.getActivities();
-			this.getFriends();
-	}
+
+  componentWillMount () {
+  	var id = this.props.match.params.id;
+  		this.props.getUser(id);
+  		this.pullAboutMeData();
+  		this.getActivities();
+  		this.getFriends();
+
+  }
 
 	getActivities() {
 		var id = this.props.match.params.id;
 		this.props.getUserActivities(id);
 	}
 
+
 	getFriends() {
 		var id = this.props.match.params.id;
 		this.props.getUserFriends(id);
 	}
 
+
+  images = ['daniel.jpg', 'elliot.jpg', 'matthew.png', 'rachel.png'];
+
+  user = '/' + this.images[Math.floor(Math.random() * this.images.length)];
+
+
 	render() {
 		return (
 			[<Container style={{marginTop: '20px'}} id="profile">
-				{this.props.user && this.props.currentProfile
-					? <ProfilePic user={this.props.currentProfile} currentUser={this.props.user} name={this.props.currentProfile && this.props.currentProfile.name} checkFriendStatus={this.props.checkFriendStatus} friendStatus={this.props.friendStatus} requested={this.props.requested} accepted={this.props.accepted}/>
+
+				{this.props.user && this.props.currentProfile 
+					? <ProfilePic defaultImage={this.images[0]} image= {this.props.currentProfile.imageUrl} user={this.props.currentProfile} currentUser={this.props.user} name={this.props.currentProfile && this.props.currentProfile.name} checkFriendStatus={this.props.checkFriendStatus} friendStatus={this.props.friendStatus} requested={this.props.requested}/>
+
 					: null
 				}
 				<Card.Group itemsPerRow={3}>
 					<Activities user={this.props.currentProfile} activities={this.props.activities}/>
 					<AboutMe user={this.props.currentProfile} loggedIn={this.props.user} info={this.props.info} showSetupModal={this.showSetupModal.bind(this)}/>
-					<Friends friends={this.props.friends}/>
+					<Friends friends={this.props.friends} currentProfile={this.props.currentProfile}/>
 				</Card.Group>
 			</Container>,
 			<Container>

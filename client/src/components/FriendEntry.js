@@ -8,11 +8,12 @@ const FriendEntry = (props) => (
       <Item.Content verticalAlign='middle'>
       <Item.Image onClick={() => {props.handleUserClick(props.user)}}
       			  size='tiny'
-      			  src='/daniel.jpg'
+      			  src={props.user.imageUrl ? props.user.imageUrl : '/daniel.jpg'}
       			  id="friendImage"
       			  shape='circular'/>
       </Item.Content>
       <Item.Content>
+      {console.log("yoooooooooo",props)}
         <Item.Header id="friendName">
             {props.user.name}
         </Item.Header>

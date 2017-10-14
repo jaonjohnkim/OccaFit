@@ -27,14 +27,25 @@ body {
 	border-radius: 25px;
 }
 
-#friendImage:hover {
+#friendImage :hover {
 	border: 3px solid slategray;
 	border-radius: 50px;
+}
 
+#profileImage:hover {
+	border: 3px solid slategray;
+	border-radius: 50%;
 }
 
 #friendName {
 	background-color: 
+}
+#modalDescription {
+	margin-left: 20px;
+}
+
+.editbuttion {
+	float: center;
 }
 
 

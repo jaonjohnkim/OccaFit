@@ -146,6 +146,19 @@ router.post('/friends', (req, res) => {
   });
 });
 
+router.get('/getProfileImage',(req,res) => {
+  var id = req.session.passport.user;
+  db.getImage(id, function(err, result){
+     if (err) {
+      console.log('ERROR:', err);
+    } else {
+      res.send(result);
+    }
+  })
+ 
+  
+});
+
 router.get('/:id', (req, res) => {
   // res.send('RENDER profile page');
   // console.log('user profile', req.user);
@@ -157,5 +170,23 @@ router.get('/:id', (req, res) => {
     }
   })
 });
+
+router.post('/uploadImage', (req,res) => {
+  var id = req.session.passport.user;
+  var url = req.body.url
+  console.log("SERVER URLNEW IMAGE", url)
+  db.addImage(url, id, function(err, result){
+     if (err) {
+      console.log('ERROR:', err);
+    } else {
+      res.send(result);
+    }
+  })
+  
+});
+
+
+
+
 
 module.exports = router;
