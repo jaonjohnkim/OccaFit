@@ -39,21 +39,26 @@ class MainNav extends Component {
     var newPath = '/profile/' + userId;
     this.setState({path: newPath});
     this.setState({search: true}); 
-
+    setTimeout(() => {
       this.props.getUser(userId);
       this.props.getUserActivities(userId);
       this.props.getAboutMe(userId);
       this.props.getUserFriends(userId);
       this.props.checkFriendStatus(this.props.user.id, userId);
+    }, 500);
+    window.location.reload();
   };
 
   changeUser() {
     var id = this.props.user.id;
+    setTimeout(() => {
       this.props.getUser(id);
       this.props.getUserActivities(id);
       this.props.getAboutMe(id);
       this.props.getUserFriends(id);
       this.props.checkFriendStatus(id, this.props.currentProfile.id);
+    }, 500); 
+    window.location.reload();
   }
 
   signOutRedirect = () => {}
