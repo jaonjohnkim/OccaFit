@@ -7,16 +7,12 @@ var About = () => (
       <Container text>
         <Header
           as='h1'
-          content='FitBud'
+          content='OccaFit'
           style={{ fontSize: '4em', fontWeight: 'normal', marginBottom: 0, marginTop: '1em' }}
         />
         <Header
           as='h2'
-          content='Fitbud was founded by Liz, Romy, Yu and Tirumari.
-          The founders experienced a problem where they wanted a workout buddy to make exercising
-          more fun and to keep themselves accountable. They created 
-          Fitbud to simplify the process of finding a fitness buddy and turn exercise into an 
-          engaging social experience.'
+          content='OccaFit helps you form connections, find friends, and build community around fitness experiences'
           style={{ fontSize: '1.7em', fontWeight: 'normal' }}
         />
       </Container>

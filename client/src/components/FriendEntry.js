@@ -13,7 +13,6 @@ const FriendEntry = (props) => (
       			  shape='circular'/>
       </Item.Content>
       <Item.Content>
-      {console.log("yoooooooooo",props)}
         <Item.Header id="friendName">
             {props.user.name}
         </Item.Header>

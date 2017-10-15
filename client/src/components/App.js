@@ -64,7 +64,6 @@ class App extends Component {
 
   alertFriendRequest = (data) => {
     this.getPendingNotifications();
-    console.log('New Friend Request:', data);
     alert('You Have a New Friend Request!');
     this.setState({friendRequest: true})
   }
@@ -112,7 +111,6 @@ class App extends Component {
   }
 
   getPendingNotifications() {
-    console.log(this.state.user);
     fetch('/notification', { credentials: "include", headers: {user: this.state.user.id} })
       .then(response => {
         return response.json();
@@ -160,14 +158,12 @@ class App extends Component {
   getUserFriends(id) {
     fetch('/profile/friends', {credentials: 'include', headers: {user: id}})
 			.then(response => {
-				console.log(response);
 				return response.json()
 			})
       		.then(response => {
           		this.setState({
 						friends: response
 			})
-			console.log('NEW FRIENDSSSS', this.state.friends)
       })
   }
 
@@ -206,7 +202,6 @@ class App extends Component {
   }
 
   render() {
-    console.log("IN APP USER", this)
     return (
       <Router>
         <div>

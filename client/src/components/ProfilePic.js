@@ -15,7 +15,6 @@ class ProfilePic extends Component {
       picture: this.props.user.imageUrl
     }
 
-    console.log('PROF PIC:', this);
     this.getImage = this.getImage.bind(this);
 
   }
@@ -24,8 +23,6 @@ class ProfilePic extends Component {
     // currentUser: this.props.currentUser.id,
     // otherUser: this.props.user.id
     this.props.checkFriendStatus(this.props.currentUser.id, this.props.user.id);
-
-    console.log('PROF PIC:', this);
 
     this.getImage();
 
@@ -48,7 +45,6 @@ class ProfilePic extends Component {
   sendImage(url) {
 
   	var info = {url: url}
-    console.log("MYNEWIMAGe", info)
   	fetch('/profile/uploadImage', {
       credentials: 'include',
       method: 'POST',
@@ -56,8 +52,6 @@ class ProfilePic extends Component {
       headers: {
           'Content-Type': 'application/json'
         }
-    }).then("response from upload image",response => {
-      if (response.ok) console.log('request made!');
     })
 
     window.location.reload();
@@ -102,8 +96,7 @@ class ProfilePic extends Component {
         id="profileImage"
         src={this.props.user.imageUrl ? this.props.user.imageUrl : '/daniel.jpg'}
         size='small' shape='circular'
-        centered style={{margin: 'auto'}}
-        onClick={()=> {console.log('got it')}}/>
+        centered style={{margin: 'auto'}}/>
         <UpdateImage
         	currentUser={this.props.currentUser}
         	user={this.props.user}

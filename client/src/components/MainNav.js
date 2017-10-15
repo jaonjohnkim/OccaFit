@@ -19,7 +19,6 @@ class MainNav extends Component {
     this.changeUser = this.changeUser.bind(this);
     this.acceptFriendRequest = this.acceptFriendRequest.bind(this);
     this.handleDeclineClick = this.handleDeclineClick.bind(this);
-    console.log('MAIN NAV:', this)
   }
 
   getSearchOptions() {

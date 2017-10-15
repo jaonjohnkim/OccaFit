@@ -30,14 +30,4 @@ class Workouts extends Component {
 
 }
 
-//dropdown menu fetches request postings
-
-//once endpoint is created, data can be passed from dashboard to workouts
-  //create accept button function inside workouts or dashboard
-    //updateRequest route
-    //passing postingId
-  //pass specific workout data from workouts to new buddies component
-    //render buddies, unaccepted with accept button
-    //accepted buddies with green text
-
 export default Workouts;

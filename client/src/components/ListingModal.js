@@ -18,8 +18,6 @@ class ListingModal extends Component {
     fetch(`/postings/${this.props.listing.id}`, {
       credentials: 'include',
       method: 'POST'
-    }).then(response => {
-      if (response.ok) console.log('request made!');
     })
   }
 

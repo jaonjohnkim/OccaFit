@@ -11,7 +11,6 @@ class UpdateImage extends React.Component {
     }
 
   uploadImage (files) {
-  	console.log('uploadFile: ')
   	const image = files[0];
 
   	const cloudName = 'hr-82';
@@ -20,12 +19,12 @@ class UpdateImage extends React.Component {
   	const timestamp = Date.now()/1000
   	const uploadPreset = 'rggovxew'
 
-  	const paramsStr = 'timestamp='+timestamp+'&upload_preset='+uploadPreset+'RM3sL5qRzjOkgMNCiXpLEn0pmm4'
+  	const paramsStr = 'timestamp='+timestamp+'&upload_preset='+uploadPreset+process.env.PRESET;
 
   	const signature = sha1(paramsStr)
 
   	const params = {
-  		'api_key': '579362539817296',
+  		'api_key': process.env.KEY,
   		'timestamp': timestamp,
   		'crop': `fill, width: 150, height: 100`,
   		'upload_preset': uploadPreset,
@@ -44,7 +43,6 @@ class UpdateImage extends React.Component {
   			alert(err)
   			return
   		}
-  		console.log('Upload complete: '+ JSON.stringify(resp.body.url))
 
   		this.changeImage(resp.body.url)
 
