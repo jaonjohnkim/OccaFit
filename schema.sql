@@ -86,4 +86,4 @@ CREATE TABLE relationship (
   FOREIGN KEY (statusId) REFERENCES StatusCode(id)
 );
 
-select postings.*, users.name from postings inner join users on postings.userId=users.id where postings.id=3;
+
