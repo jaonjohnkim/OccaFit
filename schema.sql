@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS fitbud;
+DROP DATABASE IF EXISTS occafit;
 
-CREATE DATABASE fitbud;
+CREATE DATABASE occafit;
 
-USE fitbud;
+USE occafit;
 
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS postings;
