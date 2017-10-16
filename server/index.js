@@ -21,7 +21,7 @@ var options = {
   port: 3306,
   user: process.env.DBUSER || 'root',
   password: process.env.DBPASSWORD || '',
-  database: 'occafit',
+  database: process.env.DBNAME || 'occafit',
   checkExpirationInterval: 60000,
   expiration: 3600000,
 }
