@@ -15,7 +15,7 @@ var auth = require('./middleware/auth.js');
 var passportSocketIo = require('./middleware/passportSocketIo.js');
 var sharedSession = require("express-socket.io-session");
 var cors = require('cors');
-
+ 
 var options = {
   host: process.env.DBSERVER || 'localhost',
   port: 3306,
